@@ -17,6 +17,7 @@ def redirect_to_ssl(f):
             url = request.url.replace('http://', 'https://', 1)
             return redirect(url, code=301)
         return f(*args, **kwargs)
+    return decorated
 
 
 @app.before_request
