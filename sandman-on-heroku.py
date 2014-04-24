@@ -1,3 +1,4 @@
+from flask import redirect, request
 from functools import wraps
 from os import getenv
 from sandman import app, auth
