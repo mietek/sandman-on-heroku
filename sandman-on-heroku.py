@@ -3,7 +3,6 @@ from functools import wraps
 from os import getenv
 from sandman import app, auth
 from sandman.model import activate
-from werkzeug.contrib.fixers import ProxyFix
 
 
 def redirect_to_ssl(f):
@@ -36,6 +35,5 @@ def get_password(username):
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL')
-app.wsgi_app = ProxyFix(app.wsgi_app)
 app.debug = True
 activate(browser=False)
