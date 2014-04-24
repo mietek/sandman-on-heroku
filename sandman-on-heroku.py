@@ -5,12 +5,12 @@ from sandman.model import activate
 from werkzeug.contrib.fixers import ProxyFix
 
 
-def redirect_to_ssl(self, f):
+def redirect_to_ssl(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         criteria = [
             not request.is_secure,
-            request.headers.get('X-Forwarded-Proto', 'http') != 'https',
+            not request.headers.get('X-Forwarded-Proto', 'http') == 'https',
             request.url.startswith('http://')
         ]
         if all(criteria):
