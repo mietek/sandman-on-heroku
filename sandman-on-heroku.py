@@ -1,8 +1,30 @@
-from flask_sslify import SSLify
+from functools import wraps
 from os import getenv
 from sandman import app, auth
 from sandman.model import activate
 from werkzeug.contrib.fixers import ProxyFix
+
+
+def redirect_to_ssl(self, f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        criteria = [
+            not request.is_secure,
+            request.headers.get('X-Forwarded-Proto', 'http') != 'https',
+            request.url.startswith('http://')
+        ]
+        if all criteria:
+            url = request.url.replace('http://', 'https://', 1)
+            return redirect(url, code=301)
+        return f(*args, **kwargs)
+
+
+@app.before_request
+@redirect_to_ssl
+@auth.login_required
+def before_request():
+    pass
+
 
 @auth.get_password
 def get_password(username):
@@ -10,13 +32,8 @@ def get_password(username):
         return getenv('SANDMAN_PASSWORD')
     return None
 
-@app.before_request
-@auth.login_required
-def before_request():
-    pass
 
-sslify = SSLify(app, permanent=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL')
-app.debug = True
 app.wsgi_app = ProxyFix(app.wsgi_app)
+app.debug = True
 activate(browser=False)
