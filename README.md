@@ -18,7 +18,7 @@ Variable             | Description
 ---------------------|------------
 `HEROKU_API_KEY`     | Required to get `DATABASE_URL`
 `DATABASE_OWNER_APP` | Required to get `DATABASE_URL`
-`GUNICORN_WORKERS`   | Optional
+`GUNICORN_WORKERS`   | Optional; default: `1`
 
 
 Questions

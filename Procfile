@@ -1,1 +1,1 @@
-web: gunicorn sandman-on-heroku:app --workers ${GUNICORN_WORKERS}
+web: gunicorn sandman-on-heroku:app --workers ${GUNICORN_WORKERS:-1}
