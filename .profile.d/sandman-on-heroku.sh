@@ -10,6 +10,16 @@ if [ -z "${DATABASE_OWNER_APP}" ]; then
   exit 1
 fi
 
+if [ -z "${SANDMAN_USERNAME}" ]; then
+	echo "ERROR: SANDMAN_USERNAME is not set"
+	exit 1
+fi
+
+if [ -z "${SANDMAN_PASSWORD}" ]; then
+	echo "ERROR: SANDMAN_PASSWORD is not set"
+	exit 1
+fi
+
 CONFIG_VARS_URL="https://api.heroku.com/apps/${DATABASE_OWNER_APP}/config-vars"
 HEROKU_AUTH=`echo -n :${HEROKU_API_KEY} | base64`
 
