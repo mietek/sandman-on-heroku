@@ -13,7 +13,7 @@ def redirect_to_ssl(self, f):
             request.headers.get('X-Forwarded-Proto', 'http') != 'https',
             request.url.startswith('http://')
         ]
-        if all criteria:
+        if all(criteria):
             url = request.url.replace('http://', 'https://', 1)
             return redirect(url, code=301)
         return f(*args, **kwargs)
