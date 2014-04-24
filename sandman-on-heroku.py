@@ -1,3 +1,4 @@
+from flask_sslify import SSLify
 from os import getenv
 from sandman import app, auth
 from sandman.model import activate
@@ -14,6 +15,7 @@ def get_password(username):
 def before_request():
     pass
 
+sslify = SSLify(app, permanent=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL')
 app.debug = True
 app.wsgi_app = ProxyFix(app.wsgi_app)
