@@ -15,23 +15,25 @@ Deployment
     git clone https://github.com/mietek/sandman-on-heroku.git
     cd sandman-on-heroku
     heroku create
-    heroku config:set HEROKU_API_KEY=`heroku auth:token`
-    heroku config:set DATABASE_OWNER_APP=${YOUR_EXISTING_HEROKU_APP_NAME}
-    heroku config:set SANDMAN_USERNAME=${YOUR_NEW_SANDMAN_USERNAME}
-    heroku config:set SANDMAN_PASSWORD=${YOUR_NEW_SANDMAN_PASSWORD}
+    heroku config:set DATABASE_URL=...
+    heroku config:set SANDMAN_USERNAME=...
+    heroku config:set SANDMAN_PASSWORD=...
     git push heroku master
 
 
 Configuration
 -------------
 
-Variable             | Description
----------------------|------------
-`HEROKU_API_KEY`     | Required; used to get `DATABASE_URL`
-`DATABASE_OWNER_APP` | Required; used to get `DATABASE_URL`
-`SANDMAN_USERNAME`   | Required; used to secure Sandman
-`SANDMAN_PASSWORD`   | Required; used to secure Sandman
-`GUNICORN_WORKERS`   | Optional; default: `1`
+Variable           | Description
+-------------------|------------
+`DATABASE_URL`     | Connection details for Heroku Postgres
+`SANDMAN_USERNAME` | Username for Sandman
+`SANDMAN_PASSWORD` | Password for Sandman
+`GUNICORN_WORKERS` | Number of Gunicorn workers; optional; default: `1`
+
+
+Hacking
+-------
 
 
 Questions
