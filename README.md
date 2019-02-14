@@ -1,6 +1,8 @@
-**WORK IN PROGRESS**
+-------------------------------------------------------------------------------
 
----
+This project is no longer maintained.
+
+-------------------------------------------------------------------------------
 
 
 Sandman on Heroku
@@ -47,7 +49,7 @@ To learn more about deploying web apps on Heroku, try the excellent [Heroku Hack
 Meta
 ----
 
-Available under the MIT License.
+Available under the BSD license.
 
 Written by [Miëtek Bak][].  Say hello@mietek.io
 
